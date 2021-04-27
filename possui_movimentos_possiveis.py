@@ -5,7 +5,7 @@ def possui_movimentos_possiveis(baralho):
                 return True
         elif baralho.index(i) >= 3:
              if extrai_valor(i) == extrai_valor(baralho[baralho.index(i) - 1]) or extrai_naipe(i) == extrai_naipe(baralho[baralho.index(i) - 1]):
-                True
+                return True
              if extrai_valor(i) == extrai_valor(baralho[baralho.index(i) - 3]) or extrai_naipe(i) == extrai_naipe(baralho[baralho.index(i) - 3]):
-                True
+                return True
     return False
