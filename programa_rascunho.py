@@ -57,19 +57,24 @@ if comeca == '':
         cartas += '{}. {} \n'.format(baralho.index(i) + 1, i)
     print(cartas)
 
-if possui_movimentos_possiveis(baralho):
-    escolha = int(input('Escolha uma carta (digite um número entre 1 e {}): '.format(len(baralho))))
-    escolha = escolha - 1
-    movimentos_possiveis = (lista_movimentos_possiveis(baralho, escolha))
-    print(movimentos_possiveis)
-    if len(movimentos_possiveis) == 1:
-        baralho = empilha(baralho, escolha, escolha - movimentos_possiveis[0])
-        loop_cartas()
-    elif len(movimentos_possiveis) == 2:
-        escolha2 = int(input('Sobre qual carta você quer empilhar o {} ? \n 1. {}\n 2. {}\nDigite o número da sua escolha: '.format(baralho[escolha], baralho[escolha - 1], baralho[escolha - 3])))
-        if escolha2 == 1:
-            baralho = empilha(baralho, escolha, escolha - 1)
+while True:
+    if possui_movimentos_possiveis(baralho):
+        escolha = int(input('Escolha uma carta (digite um número entre 1 e {}): '.format(len(baralho))))
+        escolha = escolha - 1
+        movimentos_possiveis = (lista_movimentos_possiveis(baralho, escolha))
+        print(movimentos_possiveis)
+        if len(movimentos_possiveis) == 1:
+            baralho = empilha(baralho, escolha, escolha - movimentos_possiveis[0])
             loop_cartas()
-        elif escolha2 == 2:
-            baralho = empilha(baralho, escolha, escolha - 3)
+        elif len(movimentos_possiveis) == 2:
+            escolha2 = int(input('Sobre qual carta você quer empilhar o {} ? \n 1. {}\n 2. {}\nDigite o número da sua escolha: '.format(baralho[escolha], baralho[escolha - 1], baralho[escolha - 3])))
+            if escolha2 == 1:
+                baralho = empilha(baralho, escolha, escolha - 1)
+                loop_cartas()
+            elif escolha2 == 2:
+                baralho = empilha(baralho, escolha, escolha - 3)
+                loop_cartas()
+        elif len(movimentos_possiveis) == 0:
             loop_cartas()
+    else:
+        break
