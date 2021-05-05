@@ -41,40 +41,65 @@ def possui_movimentos_possiveis(baralho):
                 return True
     return False
 
-def loop_cartas():
+def loop_cartas(baralho):
     cartas = ''
     print('O estado atual das cartas é: ')
     for i in baralho:
         cartas += '{}. {} \n'.format(baralho.index(i) + 1, i)
-        print(cartas)
-
-comeca = input('Aperte [Enter] para iniciar o jogo...')
-
-if comeca == '':
-    baralho = cria_baralho()
-    cartas = ''
-    for i in baralho:
-        cartas += '{}. {} \n'.format(baralho.index(i) + 1, i)
     print(cartas)
 
-while True:
+
+def inteiro(n):
+    try:
+        int(n)
+        return True
+    except:
+        return False
+
+def comeca():
+    comeca = input('Aperte [Enter] para iniciar o jogo...')
+    if comeca == '':
+        baralho = cria_baralho()
+        cartas = ''
+        for i in baralho:
+            cartas += '{}. {} \n'.format(baralho.index(i) + 1, i)
+        print(cartas)
+    programa(baralho)
+
+
+def programa(baralho):
     if possui_movimentos_possiveis(baralho):
-        escolha = int(input('Escolha uma carta (digite um número entre 1 e {}): '.format(len(baralho))))
-        escolha = escolha - 1
-        movimentos_possiveis = (lista_movimentos_possiveis(baralho, escolha))
-        print(movimentos_possiveis)
-        if len(movimentos_possiveis) == 1:
-            baralho = empilha(baralho, escolha, escolha - movimentos_possiveis[0])
-            loop_cartas()
-        elif len(movimentos_possiveis) == 2:
-            escolha2 = int(input('Sobre qual carta você quer empilhar o {} ? \n 1. {}\n 2. {}\nDigite o número da sua escolha: '.format(baralho[escolha], baralho[escolha - 1], baralho[escolha - 3])))
-            if escolha2 == 1:
-                baralho = empilha(baralho, escolha, escolha - 1)
-                loop_cartas()
-            elif escolha2 == 2:
-                baralho = empilha(baralho, escolha, escolha - 3)
-                loop_cartas()
-        elif len(movimentos_possiveis) == 0:
-            loop_cartas()
+        escolha = input('Escolha uma carta (digite um número entre 1 e {}): '.format(len(baralho)))
+        if inteiro(escolha):
+            escolha = int(escolha) - 1
+            movimentos_possiveis = (lista_movimentos_possiveis(baralho, escolha))
+            if len(movimentos_possiveis) == 1:
+                baralho = empilha(baralho, escolha, escolha - movimentos_possiveis[0])
+                loop_cartas(baralho)
+                programa(baralho)
+            elif len(movimentos_possiveis) == 2:
+                escolha2 = int(input('Sobre qual carta você quer empilhar o {} ? \n 1. {}\n 2. {}\nDigite o número da sua escolha: '.format(baralho[escolha], baralho[escolha - 1], baralho[escolha - 3])))
+                if escolha2 == 1:
+                    baralho = empilha(baralho, escolha, escolha - 1)
+                    loop_cartas(baralho)
+                    programa(baralho)
+                elif escolha2 == 2:
+                    baralho = empilha(baralho, escolha, escolha - 3)
+                    loop_cartas(baralho)
+                    programa(baralho)
+            elif len(movimentos_possiveis) == 0:
+                print('A carta {} não pode ser movida. Por favor, digite um número entre 1 e {}:'.format(baralho[escolha], len(baralho)))
+                programa(baralho)
+        else:
+            print('Insira um número válido')
+            programa(baralho)
     else:
-        break
+        if len(baralho) == 1:
+            print('Parabéns!!! Você venceu!!!')
+        else:
+            print('Não há mais nenhum movimento possível. Você perdeu :(')
+    novamente = input('Deseja jogar novamente (s/n)? ')
+    if novamente == 's':
+        comeca()
+
+comeca()
