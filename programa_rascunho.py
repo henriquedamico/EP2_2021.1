@@ -57,20 +57,22 @@ def inteiro(n):
         return False
 
 def comeca():
-    comeca = input('Aperte [Enter] para iniciar o jogo...')
-    if comeca == '':
-        baralho = cria_baralho()
-        cartas = ''
-        for i in baralho:
-            cartas += '{}. {} \n'.format(baralho.index(i) + 1, i)
-        print(cartas)
+    comeca = 'x'
+    while comeca != '':
+        comeca = input('Aperte [Enter] para iniciar o jogo...')
+    
+    baralho = cria_baralho()
+    cartas = ''
+    for i in baralho:
+        cartas += '{}. {} \n'.format(baralho.index(i) + 1, i)
+    print(cartas)
     programa(baralho)
 
 
 def programa(baralho):
     if possui_movimentos_possiveis(baralho):
         escolha = input('Escolha uma carta (digite um número entre 1 e {}): '.format(len(baralho)))
-        if inteiro(escolha):
+        if inteiro(escolha) and escolha <= len(baralho):
             escolha = int(escolha) - 1
             movimentos_possiveis = (lista_movimentos_possiveis(baralho, escolha))
             if len(movimentos_possiveis) == 1:
@@ -88,7 +90,7 @@ def programa(baralho):
                     loop_cartas(baralho)
                     programa(baralho)
             elif len(movimentos_possiveis) == 0:
-                print('A carta {} não pode ser movida. Por favor, digite um número entre 1 e {}:'.format(baralho[escolha], len(baralho)))
+                print('A carta {} não pode ser movida.'.format(baralho[escolha], len(baralho)))
                 programa(baralho)
         else:
             print('Insira um número válido')
