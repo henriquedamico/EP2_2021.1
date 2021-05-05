@@ -72,7 +72,7 @@ def comeca():
 def programa(baralho):
     if possui_movimentos_possiveis(baralho):
         escolha = input('Escolha uma carta (digite um número entre 1 e {}): '.format(len(baralho)))
-        if inteiro(escolha) and escolha <= len(baralho):
+        if inteiro(escolha) and int(escolha) <= len(baralho):
             escolha = int(escolha) - 1
             movimentos_possiveis = (lista_movimentos_possiveis(baralho, escolha))
             if len(movimentos_possiveis) == 1:
