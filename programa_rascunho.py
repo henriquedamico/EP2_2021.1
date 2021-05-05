@@ -90,10 +90,10 @@ def programa(baralho):
                     loop_cartas(baralho)
                     programa(baralho)
             elif len(movimentos_possiveis) == 0:
-                print('A carta {} não pode ser movida.'.format(baralho[escolha], len(baralho)))
+                print('A carta {} não pode ser movida.'.format(baralho[escolha])))
                 programa(baralho)
         else:
-            print('Insira um número válido')
+            print('Posição inválida')
             programa(baralho)
     else:
         if len(baralho) == 1:
