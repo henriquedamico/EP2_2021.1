@@ -69,6 +69,22 @@ def comeca():
     programa(baralho)
 
 
+def duas_cartas(baralho, escolha):
+    escolha2 = int(input('Sobre qual carta você quer empilhar o {} ? \n 1. {}\n 2. {}\nDigite o número da sua escolha: '.format(baralho[escolha], baralho[escolha - 1], baralho[escolha - 3])))
+    if escolha2 == 1:
+        baralho = empilha(baralho, escolha, escolha - 1)
+        loop_cartas(baralho)
+        programa(baralho)
+    elif escolha2 == 2:
+        baralho = empilha(baralho, escolha, escolha - 3)
+        loop_cartas(baralho)
+        programa(baralho)
+    else:
+        print('Opção inválida')
+        duas_cartas(baralho, escolha)
+
+
+ 
 def programa(baralho):
     if possui_movimentos_possiveis(baralho):
         escolha = input('Escolha uma carta (digite um número entre 1 e {}): '.format(len(baralho)))
@@ -80,17 +96,9 @@ def programa(baralho):
                 loop_cartas(baralho)
                 programa(baralho)
             elif len(movimentos_possiveis) == 2:
-                escolha2 = int(input('Sobre qual carta você quer empilhar o {} ? \n 1. {}\n 2. {}\nDigite o número da sua escolha: '.format(baralho[escolha], baralho[escolha - 1], baralho[escolha - 3])))
-                if escolha2 == 1:
-                    baralho = empilha(baralho, escolha, escolha - 1)
-                    loop_cartas(baralho)
-                    programa(baralho)
-                elif escolha2 == 2:
-                    baralho = empilha(baralho, escolha, escolha - 3)
-                    loop_cartas(baralho)
-                    programa(baralho)
+                duas_cartas(baralho, escolha)
             elif len(movimentos_possiveis) == 0:
-                print('A carta {} não pode ser movida.'.format(baralho[escolha])))
+                print('A carta {} não pode ser movida.'.format(baralho[escolha]))
                 programa(baralho)
         else:
             print('Posição inválida')
@@ -103,5 +111,5 @@ def programa(baralho):
     novamente = input('Deseja jogar novamente (s/n)? ')
     if novamente == 's':
         comeca()
-
+ 
 comeca()
