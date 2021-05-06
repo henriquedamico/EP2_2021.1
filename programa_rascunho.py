@@ -71,6 +71,7 @@ def comeca():
 def duas_cartas(baralho, escolha):
     escolha2 = input('Sobre qual carta você quer empilhar o {} ? \n 1. {}\n 2. {}\nDigite o número da sua escolha: '.format(baralho[escolha], baralho[escolha - 1], baralho[escolha - 3]))
     if inteiro(escolha2):
+        escolha2 = int(escolha2)
         if escolha2 == 1:
             baralho = empilha(baralho, escolha, escolha - 1)
             loop_cartas(baralho)
@@ -91,7 +92,7 @@ def duas_cartas(baralho, escolha):
 def programa(baralho):
     if possui_movimentos_possiveis(baralho):
         escolha = input('Escolha uma carta (digite um número entre 1 e {}): '.format(len(baralho)))
-        if inteiro(escolha) and int(escolha) <= len(baralho):
+        if inteiro(escolha) and int(escolha) <= len(baralho) and int(escolha) > 0:
             escolha = int(escolha) - 1
             movimentos_possiveis = (lista_movimentos_possiveis(baralho, escolha))
             if len(movimentos_possiveis) == 1:
@@ -116,5 +117,4 @@ def programa(baralho):
         comeca()
  
 comeca()
-
 
