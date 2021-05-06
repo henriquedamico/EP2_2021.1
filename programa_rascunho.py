@@ -67,18 +67,21 @@ def comeca():
         cartas += '{}. {} \n'.format(baralho.index(i) + 1, i)
     print(cartas)
     programa(baralho)
-
-
+    
 def duas_cartas(baralho, escolha):
-    escolha2 = int(input('Sobre qual carta você quer empilhar o {} ? \n 1. {}\n 2. {}\nDigite o número da sua escolha: '.format(baralho[escolha], baralho[escolha - 1], baralho[escolha - 3])))
-    if escolha2 == 1:
-        baralho = empilha(baralho, escolha, escolha - 1)
-        loop_cartas(baralho)
-        programa(baralho)
-    elif escolha2 == 2:
-        baralho = empilha(baralho, escolha, escolha - 3)
-        loop_cartas(baralho)
-        programa(baralho)
+    escolha2 = input('Sobre qual carta você quer empilhar o {} ? \n 1. {}\n 2. {}\nDigite o número da sua escolha: '.format(baralho[escolha], baralho[escolha - 1], baralho[escolha - 3]))
+    if inteiro(escolha2):
+        if escolha2 == 1:
+            baralho = empilha(baralho, escolha, escolha - 1)
+            loop_cartas(baralho)
+            programa(baralho)
+        elif escolha2 == 2:
+            baralho = empilha(baralho, escolha, escolha - 3)
+            loop_cartas(baralho)
+            programa(baralho)
+        else:
+            print('Opção inválida')
+            duas_cartas(baralho, escolha)
     else:
         print('Opção inválida')
         duas_cartas(baralho, escolha)
@@ -113,3 +116,5 @@ def programa(baralho):
         comeca()
  
 comeca()
+
+
