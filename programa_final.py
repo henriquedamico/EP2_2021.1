@@ -72,14 +72,14 @@ def inteiro(n):
 def comeca():
     comeca = 'x'
     while comeca != '':
-        comeca = input('Aperte [Enter] para iniciar o jogo...')
+        comeca = input('Paciência Acordeão \n seja bem vindo(a) ao jogo de Paciência Acordeão! O objetivo deste jogo é  colocar todas as cartas em uma mesma pilha. \n Existem apenas dois movimentos possíveis \n 1. Empilhar uma carta sobre a carta imediatamente anterior \n 2. Empilhar uma carta sobre a terceira carta anterior. \n Para que um movimento possa ser realizado basta que uma das duas condições abaixo seja atendida: \n 1. As duas cartas possuem o mesmo valor ou \n 2. As duas cartas possuem o mesmo naipe. \n Desde que alguma das condições acima seja satisfeita, qualquer carta pode ser movimentada. \n Aperte [Enter] para iniciar o jogo...')
     
     baralho = cria_baralho()
     cartas = ''
     for i in baralho:
         cartas += '{}. {} \n'.format(Style.RESET_ALL + str(baralho.index(i) + 1), cor(i))
     print(cartas)
-
+ 
     programa(baralho)
 
 def duas_cartas(baralho, escolha):
